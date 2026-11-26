@@ -4,7 +4,7 @@
 Everything here is drawn from scratch with Pillow: masthead, lead cards,
 a UTC timeline, a schematic world map, a markets panel and six region
 columns. Story data is embedded below and comes only from the verified
-list for this midday edition (news to about 09:00 WIB, 26 Nov 2026).
+list for this evening edition (news to about 21:00 WIB, 26 Nov 2026).
 """
 import os
 
@@ -95,94 +95,95 @@ LEADS = [
         "kicker": "TRADE WAR",
         "colour": RED,
         "head": "Trump hits 14 partners with new tariffs",
-        "body": ("China faces 20% on top of roughly 25% already in place; the EU, "
-                 "Japan and South Korea are capped at 15%; Vietnam up to 35%. "
-                 "Hearings open from 25 January."),
-        "src": "REUTERS  ·  25 NOV",
+        "body": ("China faces 20% — 40% if the 10 Jan truce lapses; India "
+                 "25%, or 17% with a deal; the EU, Japan and South Korea "
+                 "capped at 15%. Hearings open 25 January."),
+        "src": "REUTERS  ·  26 NOV",
         "bars": [("China", 20), ("EU · Japan · S. Korea", 15), ("Vietnam", 35)],
     },
     {
-        "kicker": "AI ROUT",
+        "kicker": "INFLATION",
         "colour": NAVY_SOFT,
-        "head": "Nvidia slides 3.9% to $149.30",
-        "body": ("The Nasdaq plunged 4.6% intraday before clawing back to -0.6%; "
-                 "the Dow edged up 0.3% as the AI sell-off deepened."),
-        "src": "REUTERS  ·  25 NOV",
+        "head": "Hot PCE sinks gold to 15-month low",
+        "body": ("Core PCE 3.3%, highest since 2023; Q3 GDP revised to 4.3%. "
+                 "Gold fell to $3,426, then $3,571; a Dec hike is ~92% priced."),
+        "src": "REUTERS  ·  26 NOV",
     },
     {
         "kicker": "OIL SHOCK",
         "colour": GOLD,
-        "head": "Houthis claim Ras Tanura hit",
-        "body": ("Brent jumps 3.5% to $94.61; WTI $83.68. Saudis say four "
-                 "drones downed; claim unconfirmed."),
-        "src": "REUTERS  ·  25 NOV",
+        "head": "Houthis hit Jizan port as attacks widen",
+        "body": ("A projectile struck Jizan port; a drone was downed at Jeddah, "
+                 "two missiles at Riyadh stopped. Brent $94.61, +3.5%."),
+        "src": "REUTERS  ·  26 NOV",
     },
 ]
 
 TIMELINE = [
-    ("25 NOV  13:30 UTC", "Tariffs proposed on 14 partners"),
-    ("25 NOV  16:00 UTC", "Nasdaq -4.6% intraday, closes -0.6%"),
-    ("25 NOV  EVENING", "Houthis claim Ras Tanura; Brent +3.5%"),
-    ("25 NOV  EVENING", "Pope Leo: COP31 \u201ctroubling\u201d"),
-    ("26 NOV  00:00 UTC", "Kim orders nuclear deployment"),
+    ("25 NOV  13:30 UTC", "US core PCE 3.3%; Q3 GDP revised to 4.3%"),
+    ("25 NOV  16:00 UTC", "Tariffs proposed on 14 partners"),
+    ("25 NOV  EVENING", "Houthis hit Jizan port; Jeddah drone downed"),
+    ("26 NOV  OVERNIGHT", "Russia hits Kyiv with missiles"),
+    ("26 NOV  MORNING", "EU budget + Ukraine loan summit"),
 ]
 
 NUMBERS = [
     ("$94.61", "BRENT  +3.5%"),
-    ("$149.30", "NVIDIA  -3.9%"),
+    ("$3,571", "GOLD NEAR 15-MO LOW"),
+    ("3.3%", "CORE PCE, OCT"),
     ("490,334", "RUSSIAN WAR DEAD"),
-    ("31", "KILLED, CAIRO FIRE"),
-    ("20%", "TOP CHINA TARIFF"),
-    ("-1,927", "TAIWAN POINTS LOST"),
+    ("7", "WOUNDED, KYIV STRIKE"),
+    ("1,000,000", "SPACEX SATELLITES OK'D"),
 ]
 
 REGIONS = [
     ("AMERICAS", [
+        ("Democrats vow January showdown over Trump tariffs", "JAGRAN · 26 NOV"),
+        ("Macy's 100th parade postponed to Sat; 6,000+ flights delayed", "CNN · 26 NOV"),
+        ("FedEx MD-11 overruns Miami runway; FAA lifts ground stop", "FAA · 26 NOV"),
         ("Second judge blocks Trump's birthright citizenship order", "REUTERS · 25 NOV"),
-        ("Fed Beige Book: modest growth, wage gains, price pressure persists", "FED · 25 NOV"),
-        ("US markets shut today for Thanksgiving; early close Fri 1pm ET", "NASDAQ · 26 NOV"),
-        ("Melania Trump reunites 9 Ukrainian and Russian children with families", "AP · 25 NOV"),
-        ("Ecuador minister: US talks focus on reviewing operations", "REUTERS · 25 NOV"),
-        ("US proposes 10% tariff on Brazil's Embraer jets, higher sugar duties", "REUTERS · 25 NOV"),
+        ("Fed Beige Book: modest growth, wage gains, prices up", "FED · 25 NOV"),
+        ("Trump portfolios traded Nvidia shares 44 times in 2026", "BBC · 26 NOV"),
     ]),
     ("EUROPE", [
-        ("Ukraine hits Savasleyka air base; 3 MiG-31 and 2 Su-34 out", "REUTERS · 25 NOV"),
-        ("Leaked data puts Russian war dead near 490,000", "BBC · 25 NOV"),
-        ("Russia oil refining at 20-year low after 18 refineries hit", "REUTERS · 25 NOV"),
-        ("Murmansk governor held in pre-trial detention on graft charges", "REUTERS · 25 NOV"),
-        ("Norway top court voids climate-disputed oil licences", "AP · 26 NOV"),
-        ("EU hunts new ECB chief as Lagarde resigns", "AP · 25 NOV"),
-        ("Pope Leo calls COP31 failure \u201ctroubling\u201d", "REUTERS · 25 NOV"),
+        ("Russia hits Kyiv with ballistic missiles; 7 wounded", "REUTERS · 26 NOV"),
+        ("Ukraine hits Savasleyka air base; 5 jets out", "REUTERS · 25 NOV"),
+        ("Russia hits two grain ships near Odesa", "REUTERS · 26 NOV"),
+        ("EU leaders open summit on €1.6tn budget, €45bn Ukraine loan", "AP · 26 NOV"),
+        ("Spain votes Sunday; Sanchez seeks reelection", "REUTERS · 26 NOV"),
+        ("34 nations urge Russia to halt riot-gas use in Ukraine", "REUTERS · 26 NOV"),
     ]),
     ("MIDDLE EAST", [
-        ("Israeli strike kills senior Hamas security official and family in Gaza City", "BBC · 25 NOV"),
+        ("Houthis hit Jizan port; Jeddah drone downed, Riyadh missiles stopped", "REUTERS · 26 NOV"),
+        ("Ras Tanura refinery claim still unconfirmed; 4 drones downed", "REUTERS · 25 NOV"),
+        ("Israeli strike kills Hamas official Abu Nada and wife in Gaza", "IDF · 26 NOV"),
+        ("Israeli judges urge dropping top charges against Netanyahu", "AP · 26 NOV"),
+        ("Iran says ships hit mines in Hormuz, warns vessels", "REUTERS · 25 NOV"),
         ("Cairo fuel tanker fire kills at least 31, injures 21", "GUARDIAN · 25 NOV"),
-        ("Iran says ships hit mines in Hormuz, warns vessels to coordinate", "REUTERS · 25 NOV"),
-        ("Lebanon to open second international airport next month", "REUTERS · 25 NOV"),
-        ("Israeli judges urge dropping most serious charges against Netanyahu", "AP · 26 NOV"),
     ]),
     ("AFRICA", [
         ("RSF drone strikes kill 19 civilians in Sudan's Blue Nile (Damazin)", "REUTERS · 26 NOV"),
+        ("Cheaper HIV prevention jab reaches Africa, hope for millions", "BBC · 26 NOV"),
         ("Kenya discharges last Ebola patient; DRC toll passes 5,300", "AP · 26 NOV"),
         ("S. African court backs Ramaphosa in cash-theft probe", "REUTERS · 26 NOV"),
-        ("ECOWAS approves regional force plan by end-2027", "AP · 25 NOV"),
         ("Ghana unveils heritage banknotes honouring Nkrumah, Annan", "AP · 26 NOV"),
+        ("ECOWAS approves regional force plan by end-2027", "AP · 25 NOV"),
     ]),
     ("ASIA-PACIFIC", [
         ("Kim Jong Un orders wider tactical nuclear deployment", "KCNA · 26 NOV"),
-        ("N. Korea orders Swiss office in Pyongyang shut", "AP · 26 NOV"),
-        ("Taiwan shares plunge 1,927 points; NT$ past 33", "CNA · 25 NOV"),
-        ("How China got Nvidia AI chips despite US rules", "REUTERS · 26 NOV"),
-        ("Pakistan's first astronaut reaches Tiangong aboard Shenzhou-24", "REUTERS · 25 NOV"),
-        ("India marks Constitution Day; 6,000 new IIT seats in AI, robotics, space", "PTI · 26 NOV"),
-        ("Bangladesh raises garment minimum wage 36%", "AP · 26 NOV"),
+        ("Solomon Islands signs Australia treaty; no foreign bases", "BBC · 26 NOV"),
+        ("Myanmar refuses parts of ICJ genocide ruling on Rohingya", "BBC · 26 NOV"),
+        ("Bangkok oil refinery blast injures 7, four critically", "BBC · 26 NOV"),
+        ("Hong Kong tower blaze toll reaches 168", "BBC · 26 NOV"),
+        ("13 dead as illegal gold mine floods in Indonesia", "BBC · 26 NOV"),
     ]),
     ("TECH · SCIENCE · SPORT", [
+        ("FCC clears SpaceX to launch 1m 'Starmind' AI satellites", "REUTERS · 26 NOV"),
         ("Hera images show stadium-sized asteroid crater", "ESA · 26 NOV"),
-        ("Gukesh faces Sindarov in World Chess Championship, Geneva", "PTI · 26 NOV"),
+        ("Gukesh faces Sindarov in World Chess Championship", "PTI · 26 NOV"),
         ("IPL 2027 auction draws 1,220 players", "PTI · 26 NOV"),
         ("Sooryavanshi smashes 204 off 53 balls vs UAE", "PTI · 26 NOV"),
-        ("Flipkart CEO Kalyan Krishnamurthy to step down in December", "REUTERS · 26 NOV"),
+        ("Duran Duran guitarist Andy Taylor dies aged 65", "BBC · 26 NOV"),
     ]),
 ]
 
@@ -222,11 +223,10 @@ CONTINENTS = [
 HOTSPOTS = [
     (-77, 39, "US TARIFFS", -4, -16),
     (47, 25, "RAS TANURA", -8, -16),
+    (42.5, 16.5, "JIZAN", -30, 14),
     (30, 50, "KYIV STRIKES", -6, -16),
-    (34, 31, "GAZA", -2, 14),
-    (34, 11, "SUDAN", -2, 14),
+    (34, 31, "GAZA", -34, 10),
     (126, 39, "PYONGYANG", -62, -16),
-    (121, 25, "TAIPEI", -10, 14),
 ]
 
 
@@ -241,11 +241,11 @@ def paint_masthead(d):
     d.rectangle([0, 92, W, 95], fill=GOLD)
     d.text((24, 12), "THE WORLD TODAY", font=F_TITLE, fill=(250, 247, 239))
     d.text((24, 66), "THURSDAY  26  NOVEMBER  2026", font=F_DATE, fill=(232, 196, 90))
-    right = "WORLD NEWS IN ONE PAGE  ·  MIDDAY EDITION"
+    right = "WORLD NEWS IN ONE PAGE  ·  EVENING EDITION"
     d.text((W - 24 - d.textlength(right, font=F_SMALL_B), 70),
            right, font=F_SMALL_B, fill=(200, 210, 224))
-    d.text((W - 24 - d.textlength("News to ~09:00 WIB", font=F_TINY), 16),
-           "News to ~09:00 WIB", font=F_TINY, fill=(200, 210, 224))
+    d.text((W - 24 - d.textlength("News to ~21:00 WIB", font=F_TINY), 16),
+           "News to ~21:00 WIB", font=F_TINY, fill=(200, 210, 224))
 
 
 def paint_numbers(d):
@@ -273,9 +273,9 @@ def paint_lead_card(d, x, y, w, h, lead, big):
     if lead.get("bars"):
         by = draw_wrapped(d, cx, by, lead["body"], F_BODY, w - 24, leading=15)
         # Horizontal tariff bars: name, bar, percent — one row per partner.
-        ry = by + 10
+        ry = by + 8
         d.text((cx, ry), "NEW TARIFF RATES — PROPOSED", font=F_TAG, fill=GREY)
-        ry += 16
+        ry += 14
         for name, pct in lead["bars"]:
             d.text((cx, ry), name, font=F_TINY_B, fill=INK)
             bar_x = cx + 150
@@ -283,7 +283,7 @@ def paint_lead_card(d, x, y, w, h, lead, big):
                         fill=lead["colour"])
             d.text((bar_x + pct * 6 + 6, ry), f"{pct}%", font=F_TINY_B,
                    fill=lead["colour"])
-            ry += 20
+            ry += 18
         rule(d, cx, y + h - 22, x + w - 12)
         d.text((cx, y + h - 18),
                "Proposals only — hearings open 25 January; rates may change.",
@@ -337,7 +337,7 @@ def paint_map(d):
 def paint_markets(d):
     x0, y0, w, h = 640, 412, 360, 188
     d.rectangle([x0, y0, x0 + w, y0 + h], outline=LIGHT_LINE, width=1, fill=PANEL)
-    d.text((x0 + 10, y0 + 6), "MARKETS  —  25 NOV", font=F_TAG, fill=NAVY)
+    d.text((x0 + 10, y0 + 6), "MARKETS  —  25–26 NOV", font=F_TAG, fill=NAVY)
     zero_y = y0 + 84
     d.line([(x0 + 10, zero_y), (x0 + w - 10, zero_y)], fill=INK, width=1)
     bw, gap = 62, 16
@@ -407,7 +407,7 @@ def paint_regions(d):
 def paint_footer(d):
     rule(d, 24, 992, W - 24, width=2)
     d.text((24, 999),
-           "All stories first reported 25\u201326 November 2026  ·  Sources: Reuters, AP, BBC, Guardian, PTI, CNA, KCNA, ESA, Fed, Nasdaq",
+           "All stories first reported 25\u201326 November 2026  ·  Sources: Reuters, AP, BBC, CNN, Guardian, PTI, CNA, KCNA, ESA, Fed, FAA",
            font=F_TINY, fill=GREY)
 
 
