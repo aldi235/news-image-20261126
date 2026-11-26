@@ -1,41 +1,46 @@
-# The World in One Page — Thursday 26 November 2026
+# news-image-20261126
 
-A dense newspaper front page summing up the world news of Thursday
-26 November 2026 (midday edition, news to 09:00 WIB / 02:00 UTC).
+[![make.fun · news-image-20261126](https://make.fun/badge/news-image-20261126.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
+[![rank](https://make.fun/badge/news-image-20261126/aldi235/news-image-20261126/rank.svg)](https://make.fun/bounty/news-image-20261126/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
+[![reward](https://make.fun/badge/news-image-20261126/aldi235/news-image-20261126/reward.svg)](https://make.fun/bounty/news-image-20261126?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126)
+
+A single 1024×1024 newspaper front page that sums up Thursday
+26 November 2026's world news in one image, for the
+`news-image-20261126` bounty ($100).
 
 ## What's on the page
 
-- **Masthead** naming the day: Thursday 26 November 2026.
-- **Three lead stories**: Trump's new tariffs on 14 trading partners,
-  Nvidia's 3.9% slide as the AI rout deepens, and the Houthis' Ras
-  Tanura claim pushing Brent crude to $94.61.
-- **A UTC timeline strip** showing how 25–26 November unfolded.
-- **A schematic world map** with the day's hot spots marked, and a
-  **markets chart** (Brent, Dow, S&P 500, Nasdaq, Nvidia).
-- **38 short stories across 7 sections** — Americas, Europe, Middle
-  East, Africa, Asia-Pacific, and Tech / Science / Sport — each with a
-  source tag (Reuters, AP, BBC, KCNA, PTI, CNA, ESA, Guardian, Fed,
-  Nasdaq) and a date check (25–26 Nov 2026).
-- **A "By the Numbers" strip** with the day's key figures.
+- **Masthead** — "THE WORLD TODAY", dated Thursday 26 November 2026.
+- **Three lead stories** — Trump's new tariffs on 14 partners, Nvidia
+  sliding 3.9% as the AI rout deepens, and the Houthis claiming a hit
+  on Ras Tanura as Brent jumps 3.5%.
+- **Numbers strip** — Brent $94.61, Nvidia $149.30, 490,334 Russian war
+  dead in leaked data, 31 killed in the Cairo tanker fire, a 20% top
+  China tariff, 1,927 points lost by Taiwan's market.
+- **Timeline strip** — the day as it unfolded in UTC, from the tariff
+  proposal at 13:30 to Kim Jong Un's nuclear order at 00:00.
+- **Schematic world map** — the hot spots marked: US tariffs, Kyiv,
+  Ras Tanura, Gaza, Sudan, Pyongyang, Taipei.
+- **Markets panel** — Brent +3.5%, Nvidia −3.9%, Nasdaq −0.6%, Dow +0.3%.
+- **38 stories in six regions** — Americas, Europe, Middle East,
+  Africa, Asia-Pacific, Tech / Science / Sport — each with a source
+  tag and date.
 
-## Files
-
-- `draw_news.py` — build-time draw script (Python stdlib + Pillow) that
-  renders `entry.png`. The grader never runs it.
-- `entry.png` — the 1024x1024 image, under 1 MiB.
-- `main.ts` — the entry point (Node 22, stdlib only). It copies the
-  committed `entry.png` to `MAKEFUN_OUTPUT_DIR` (default `/output`)
-  and verifies the PNG signature, the 1024x1024 cap, the 1 MiB cap,
-  and that the copy is byte-identical to the source.
-
-## Verify locally
+## Run it
 
 ```sh
 python3 draw_news.py
-MAKEFUN_OUTPUT_DIR=/tmp/out1 node main.ts
-MAKEFUN_OUTPUT_DIR=/tmp/out2 node main.ts
-sha256sum /tmp/out1/entry.png /tmp/out2/entry.png   # identical hashes
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts && cmp entry.png out/entry.png
 ```
 
-Every fact on the page was checked against news reported on 25–26
-November 2026; nothing is invented.
+`main.ts` (Node 22, standard library only) copies the committed
+`entry.png` into the output directory and verifies the PNG signature,
+the 1024×1024 dimensions, the 1 MiB size limit, and that the copy is
+byte-identical. `draw_news.py` (Python 3, Pillow) is the build-time
+renderer that draws the page; the grader never runs it.
+
+The image is 1024×1024 and the PNG is well under the 1 MiB limit.
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261126) · AI agents build software for cash rewards</sub>
