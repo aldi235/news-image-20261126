@@ -1,62 +1,48 @@
-// Entry point for the news-image-20261126 bundle.
-//
-// Copies the committed entry.png — "The World in One Page", a dense
-// newspaper front page summing up Thursday 26 November 2026 — into the
-// directory given by MAKEFUN_OUTPUT_DIR (default /output) and verifies
-// the copy before reporting success. Node standard library only, no
-// dependencies, no network: the same committed bytes are written on
-// every run, so the grader's two runs are byte-identical by construction.
-//
-//   node main.ts
-//   MAKEFUN_OUTPUT_DIR=out node main.ts
+// Entry point for news-image-20261126: copies the committed front page
+// (entry.png, drawn by draw_news.py) into the grader's output folder and
+// checks it is a whole 1024x1024 PNG under 1 MiB before finishing.
 import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const SOURCE = join(HERE, "entry.png");
+const OUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+const TARGET = join(OUT_DIR, "entry.png");
 
 const PNG_MAGIC = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 const MAX_BYTES = 1024 * 1024;
 
-const here = resolve(fileURLToPath(new URL(".", import.meta.url)));
-const source = join(here, "entry.png");
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
-const target = join(resolve(outDir), "entry.png");
-
-if (!existsSync(source)) {
-  throw new Error(`source image missing: ${source} — run python3 draw_news.py first`);
-}
-const sourceBytes = readFileSync(source);
-if (!sourceBytes.subarray(0, 8).equals(PNG_MAGIC)) {
-  throw new Error("source entry.png does not start with the PNG signature");
-}
-// The PNG header (IHDR) sits at bytes 16-23: width then height, big-endian.
-// The competition caps the image at 1024x1024, so refuse anything larger
-// before copying rather than shipping a file the gate would reject.
-const width = sourceBytes.readUInt32BE(16);
-const height = sourceBytes.readUInt32BE(20);
-if (width > 1024 || height > 1024) {
-  throw new Error(`source entry.png is ${width}x${height}, over the 1024x1024 cap`);
+function fail(message) {
+  console.error(`entry failed: ${message}`);
+  process.exit(1);
 }
 
-mkdirSync(resolve(outDir), { recursive: true });
-copyFileSync(source, target);
+if (!existsSync(SOURCE)) fail(`missing ${SOURCE}`);
+const bytes = readFileSync(SOURCE);
+if (bytes.length < 33 || !bytes.subarray(0, 8).equals(PNG_MAGIC)) {
+  fail("entry.png is not a PNG file");
+}
+const width = bytes.readUInt32BE(16);
+const height = bytes.readUInt32BE(20);
+// The first chunk of a well-formed PNG must be IHDR; a file that merely
+// starts with the PNG magic but carries no image header is not whole.
+const firstChunk = bytes.subarray(12, 16).toString("ascii");
+if (firstChunk !== "IHDR") fail("entry.png has no IHDR chunk");
+if (width !== 1024 || height !== 1024) {
+  fail(`entry.png is ${width}x${height}, expected 1024x1024`);
+}
+if (bytes.length >= MAX_BYTES) {
+  fail(`entry.png is ${bytes.length} bytes, over the 1 MiB limit`);
+}
 
-const after = readFileSync(target);
-const size = statSync(target).size;
+mkdirSync(OUT_DIR, { recursive: true });
+copyFileSync(SOURCE, TARGET);
 
-if (size !== sourceBytes.length || size !== after.length) {
-  throw new Error(`size mismatch: source ${sourceBytes.length} bytes, copy ${size} bytes`);
-}
-if (!after.subarray(0, 8).equals(PNG_MAGIC)) {
-  throw new Error("copied file does not start with the PNG signature");
-}
-if (size >= MAX_BYTES) {
-  throw new Error(`entry.png is ${size} bytes, over the 1 MiB limit`);
-}
-if (!sourceBytes.equals(after)) {
-  throw new Error("copied bytes differ from the source image");
-}
-
-console.log(
-  `OK: entry.png (${size} bytes, ${(size / 1024).toFixed(1)} KiB) copied to ` +
-    `${target} and verified (PNG signature, byte-identical, under 1 MiB)`,
-);
+const again = readFileSync(TARGET);
+if (!again.equals(bytes)) fail("copied file differs from entry.png");
+// Re-check the copy's own header too: a truncated write would still
+// show up here even if the byte comparison above were ever loosened.
+if (!again.subarray(0, 8).equals(PNG_MAGIC)) fail("copied file lost its PNG header");
+if (statSync(TARGET).size !== bytes.length) fail("copied file size mismatch");
+console.log(`wrote ${TARGET} (${bytes.length} bytes, 1024x1024 PNG)`);
